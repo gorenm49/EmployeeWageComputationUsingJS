@@ -18,18 +18,22 @@ const FULL_TIME_HRS =8;
 const WAGE_PER_HRS =20;
 let emphr = 0;
 
-checkStatus = Math.floor(Math.random() * 10) % 3;
-switch(checkStatus)
+function retriveWorkingHrs(checkStatus)
 {
-    case IS_PART_TIME:
-        emphr = PART_TIME_HRS;
+    switch(checkStatus)
+    {
+        case IS_PART_TIME:
+            return PART_TIME_HRS;
         break;
-    case IS_FULL_TIME:
-        emphr = FULL_TIME_HRS;
-        break;
-    default:
-        emphr = 0;
+        case IS_FULL_TIME:
+            return FULL_TIME_HRS;
+            break;
+        default:
+            return 0;
+    }
 }
 
+checkStatus = Math.floor(Math.random() * 10) % 3;
+emphr = retriveWorkingHrs(checkStatus)
 let empWage = emphr * WAGE_PER_HRS;
 console.log("Employee wage is : "+empWage);
