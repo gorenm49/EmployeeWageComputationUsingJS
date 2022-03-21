@@ -36,4 +36,14 @@ function retriveWorkingHrs(checkStatus)
 checkStatus = Math.floor(Math.random() * 10) % 3;
 emphr = retriveWorkingHrs(checkStatus)
 let empWage = emphr * WAGE_PER_HRS;
-console.log("Employee wage is : "+empWage);
+console.log("Employee wage for a day is : "+empWage);
+
+const WORKING_DAYS_IN_MONTH = 20;
+
+for(let i = 0; i < WORKING_DAYS_IN_MONTH ; i++)
+{
+    emphr += retriveWorkingHrs(checkStatus) ;
+}
+
+empWage = emphr * WAGE_PER_HRS;
+console.log("Total Work hrs :"+emphr+" Total Employee wage for a Month is : "+empWage);
