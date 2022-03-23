@@ -118,3 +118,14 @@ function isPartTimeWage(dailyempWage)
 }
 
 console.log("result for Part time wage : "+dayCountWithWageMappingArray.some(isPartTimeWage));
+
+function employeesTotalWorkingDays(workingDays,dailyempWage)
+{
+    if(dailyempWage >0)
+    {
+        workingDays++;
+    }
+    return workingDays;
+}
+
+console.log("Number of days Employee worked: "+dailyWageArray.reduce(employeesTotalWorkingDays,0));
