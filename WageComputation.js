@@ -104,3 +104,5 @@ function retriveAllFullTimeWageRecords(dailyempWage)
 
 let fullDayWageArray = dayCountWithWageMappingArray.filter(retriveAllFullTimeWageRecords);
 console.log("filtered result for full time wage 160 earned by EMployee:\n"+fullDayWageArray);
+
+console.log("filtered first result for full time wage 160 earned by EMployee:\n"+dayCountWithWageMappingArray.find(retriveAllFullTimeWageRecords));
