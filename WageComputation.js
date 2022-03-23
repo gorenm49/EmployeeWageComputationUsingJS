@@ -51,8 +51,6 @@ for(let i = 0; i < WORKING_DAYS_IN_MONTH ; i++)
 
 function calculateTotalWage(emphr)
 {
-    // checkStatus = Math.floor(Math.random() * 10) % 3;
-    // emphr = retriveWorkingHrs(checkStatus)
     return emphr * WAGE_PER_HRS
 }
 
@@ -113,3 +111,10 @@ function checkContainsFullTime(dailyempWage)
 }
 
 console.log("All elements having full time wage: "+fullDayWageArray.every(checkContainsFullTime));
+
+function isPartTimeWage(dailyempWage)
+{
+    return dailyempWage.includes("80");
+}
+
+console.log("result for Part time wage : "+dayCountWithWageMappingArray.some(isPartTimeWage));
