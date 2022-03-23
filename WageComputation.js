@@ -37,20 +37,26 @@ function retriveWorkingHrs(checkStatus)
 
 function calculateWage(emphr)
 {
+    checkStatus = Math.floor(Math.random() * 10) % 3;
+    emphr = retriveWorkingHrs(checkStatus)
     return emphr * WAGE_PER_HRS
 }
-
-checkStatus = Math.floor(Math.random() * 10) % 3;
-emphr = retriveWorkingHrs(checkStatus)
-let empWage = calculateWage(emphr);
-console.log("Employee wage for a day is : "+empWage);
+let dailyempWage = calculateWage(emphr);
+console.log("Employee wage for a day is : "+dailyempWage);
 
 for(let i = 0; i < WORKING_DAYS_IN_MONTH ; i++)
 {
     emphr += retriveWorkingHrs(checkStatus) ;
 }
 
-empWage = calculateWage(emphr);
+function calculateTotalWage(emphr)
+{
+    // checkStatus = Math.floor(Math.random() * 10) % 3;
+    // emphr = retriveWorkingHrs(checkStatus)
+    return emphr * WAGE_PER_HRS
+}
+
+let empWage = calculateTotalWage(emphr);
 console.log("Total Work hrs : "+emphr+"  Total Employee wage for a Month is : "+empWage);
 
 let total_empHRs = 0;
@@ -63,7 +69,7 @@ while(total_empHRs <= MAX_WORKING_HRS_IN_MONTH && total_workingDays < WORKING_DA
     total_empHRs += retriveWorkingHrs(checkStatus);
     dailyWageArray.push(calculateWage(emphr))
 }
-empWage = calculateWage(total_empHRs);
+empWage = calculateTotalWage(total_empHRs);
 console.log("Total Working days: "+total_workingDays+"  Total working HRS :"+total_empHRs+"  Total Employee wage : "+empWage);
 
 let totalEmpWage = 0;
@@ -74,8 +80,19 @@ function sum (empWage)
 dailyWageArray.forEach(sum);
 console.log("Total Working days: "+total_workingDays+"  Total working HRS :"+total_empHRs+"  Total Employee wage : "+totalEmpWage);
 
-function TotalWages(totalwages,dailyWage)
+function TotalWages(totalwages,empWage)
 {
-    return totalwages + dailyWage;
+    return totalwages + empWage;
 }
 console.log("Employee wage with reduce : "+dailyWageArray.reduce(TotalWages,0));
+
+let dayCounter = 0;
+
+function dayCountWithWageMapping(dailyempWage)
+{
+    dayCounter ++;
+    return dayCounter + " = "+ dailyempWage+"\n";
+}
+
+let dayCountWithWageMappingArray = dailyWageArray.map(dayCountWithWageMapping);
+console.log("Day with Wages :\n"+dayCountWithWageMappingArray);
