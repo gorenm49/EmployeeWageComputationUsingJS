@@ -96,3 +96,11 @@ function dayCountWithWageMapping(dailyempWage)
 
 let dayCountWithWageMappingArray = dailyWageArray.map(dayCountWithWageMapping);
 console.log("Day with Wages :\n"+dayCountWithWageMappingArray);
+
+function retriveAllFullTimeWageRecords(dailyempWage)
+{
+    return dailyempWage.includes("160");
+}
+
+let fullDayWageArray = dayCountWithWageMappingArray.filter(retriveAllFullTimeWageRecords);
+console.log("filtered result for full time wage 160 earned by EMployee:\n"+fullDayWageArray);
