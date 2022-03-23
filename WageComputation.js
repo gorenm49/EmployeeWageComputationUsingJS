@@ -106,3 +106,10 @@ let fullDayWageArray = dayCountWithWageMappingArray.filter(retriveAllFullTimeWag
 console.log("filtered result for full time wage 160 earned by EMployee:\n"+fullDayWageArray);
 
 console.log("filtered first result for full time wage 160 earned by EMployee:\n"+dayCountWithWageMappingArray.find(retriveAllFullTimeWageRecords));
+
+function checkContainsFullTime(dailyempWage)
+{
+    return dailyempWage.includes("160");
+}
+
+console.log("All elements having full time wage: "+fullDayWageArray.every(checkContainsFullTime));
