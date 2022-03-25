@@ -7,16 +7,27 @@ class EmployeePayroll
 
     constructor(...params)
     {
+        
         this.id  = params[0];
         this.name = params[1];
         this.salary = params[2];
         this.gender = params[3];
         this.startDate = params[4];
+      
     }
 
     get name(){return this._name;}
-    set name(name){this._name = name;}
+    set name(name){
+        let regex_name = new RegExp('^[A-Z]{1}[a-z]{3,}$');
+        const ok = regex_name.exec(name);
 
+        if(ok){
+            this._name = name;
+        }
+        else  throw 'Name format is not valid..';
+        
+    }
+    
     toString(){
         const FORMAT = {year: 'numeric', month: 'numeric', day:'numeric'};
         const EMP_DATE = this.startDate === undefined ? "undefined":
@@ -26,7 +37,15 @@ class EmployeePayroll
     }
 }
 
-let employeePayroll = new EmployeePayroll(1,"Abhijeet",20000,"M",new Date());
-console.log(employeePayroll.toString());
+try{
+    let employeePayroll = new EmployeePayroll(0,"Rama",20000,"M",new Date());
+    console.log(employeePayroll.toString()); 
+}
+catch(e){
+    console.error(e);
+}
+
+
+
 
 

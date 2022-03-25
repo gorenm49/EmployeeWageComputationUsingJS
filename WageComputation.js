@@ -44,9 +44,11 @@ function calculateWage(emphr)
 let dailyempWage = calculateWage(emphr);
 console.log("Employee wage for a day is : "+dailyempWage);
 
+let total_empHRs =0;
+
 for(let i = 0; i < WORKING_DAYS_IN_MONTH ; i++)
 {
-    emphr += retriveWorkingHrs(checkStatus) ;
+     total_empHRs += retriveWorkingHrs(checkStatus) ;
 }
 
 function calculateTotalWage(emphr)
@@ -54,10 +56,11 @@ function calculateTotalWage(emphr)
     return emphr * WAGE_PER_HRS
 }
 
-let empWage = calculateTotalWage(emphr);
-console.log("Total Work hrs : "+emphr+"  Total Employee wage for a Month is : "+empWage);
+let empWage = calculateTotalWage(total_empHRs);
+console.log("Total Work hrs : "+total_empHRs+"  Total Employee wage for a Month is : "+empWage);
 
-let total_empHRs = 0;
+
+ total_empHRs = 0;
 let total_workingDays = 0;
 let dailyWageArray = new Array(); 
 let dailyWageMap = new Map();
@@ -67,7 +70,8 @@ let dailyWageAndHrsArray = new Array();
 while(total_empHRs <= MAX_WORKING_HRS_IN_MONTH && total_workingDays < WORKING_DAYS_IN_MONTH)
 {
     total_workingDays++;
-    total_empHRs += retriveWorkingHrs(checkStatus);
+    emphr = retriveWorkingHrs(checkStatus);
+    total_empHRs += emphr;
     dailyWageArray.push(calculateWage(emphr));
     dailyWageAndHrsArray.push({
                     dayNum:total_workingDays,
@@ -170,13 +174,29 @@ console.log("Non working days: "+nonWorkingDays);
 
 console.log(" Representation of Daily worked hr and Daily Wage Earned: "+dailyWageAndHrsArray);
 
-// let totalHours = dailyWageAndHrsArray
-// .filter(dailyWageAndHrs=> dailyWageAndHrs.empWage>0)
-// .reduce((emphr,dailyWageAndHrs)=>emphr+=dailyWageAndHrs.emphr);
+let totalHours = dailyWageAndHrsArray
+.filter(dailyWageAndHrs=> dailyWageAndHrs.dailyWage>0)
+.reduce((totalHours,dailyWageAndHrs)=>totalHours+=dailyWageAndHrs.dailyHrs,0);
 
-// let totalWages = dailyWageAndHrsArray
-// .filter(dailyWageAndHrs=> dailyWageAndHrs.empWage>0)
-// .reduce((empWage,dailyWageAndHrs)=>empWage+=dailyWageAndHrs.empWage);
+let totalWages = dailyWageAndHrsArray
+.filter(dailyWageAndHrs=> dailyWageAndHrs.dailyWage>0)
+.reduce((totalWages,dailyWageAndHrs)=>totalWages+=dailyWageAndHrs.dailyWage,0);
 
-// console.log("Total Hrs :"+totalHours+"  Total Wage : "+totalWages);
+console.log("Total Hrs :"+totalHours+"  Total Wage : "+totalWages);
+
+
+console.log("\nFull Working Working Days Str Arr :")
+dailyWageAndHrsArray.filter(dailyHrAndWage => dailyHrAndWage.dailyHrs ==8)
+                                                .forEach(dailyHrAndWage=>console.log(dailyHrAndWage.dayNum));
+
+let partWorkingDaysStrArr = dailyWageAndHrsArray.filter(dailyHrAndWage => dailyHrAndWage.dailyHrs ==4)
+                                                .map(dailyHrAndWage => dailyHrAndWage.dayNum.toString());
+console.log("\npart Working Days Str Arr :"+partWorkingDaysStrArr)
+//partWorkingDaysStrArr.forEach(x=>console.log(x));
+
+let nonWorkingDaysNum= dailyWageAndHrsArray.filter(dailyHrAndWage => dailyHrAndWage.dailyHrs ==0)
+                                                .map(dailyHrAndWage => dailyHrAndWage.dayNum);
+console.log("\nNon Working Days Num :"+nonWorkingDaysNum);
+
+
 
